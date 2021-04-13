@@ -39,6 +39,7 @@ class CartItem extends Component {
 
 
     render() {
+        
         // Object destructuring
         const {price, title, qty} = this.state;
         return (
