@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 
 class CartItem extends Component {
 
-    constructor(){
-        super();
-        this.state={
-            price: 999,
-            title: 'M Phone',
-            qty: 1,
-            img: ''
-        }
-    }
+    // constructor(){
+    //     super();
+    //     // this.state={
+    //     //     price: 999,
+    //     //     title: 'M Phone',
+    //     //     qty: 1,
+    //     //     img: ''
+    //     // }
+    // }
 
     increaseQuantity(){
         // setState form 1
@@ -41,14 +41,14 @@ class CartItem extends Component {
     render() {
         
         // Object destructuring
-        const {price, title, qty} = this.state;
+        const {price, title, qty} = this.props.product;
         return (
             <div className="cart-item">
                 <div className="left-block">
                     <img style={styles.image}></img>
                 </div>
                 <div className="right-block">
-                <div style={{fontSize:25}}>{this.state.title}</div>
+                <div style={{fontSize:25}}>{title}</div>
                 <div style={{color:'#777'}}>Rs {price}</div>
                 <div style={{color:'#777'}}>Qty: {qty}</div>
                 <div className="cart-item-actions">
