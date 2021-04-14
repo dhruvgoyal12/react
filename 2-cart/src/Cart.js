@@ -60,7 +60,7 @@ export default class Cart extends Component {
     handleDeleteProduct = (id) =>{
         const {products} = this.state;
 
-        const items = products.filter((item) => item.id != id); // [{}]
+        const items = products.filter((item) => item.id !== id); // [{}]
         this.setState({
             products: items
         })
