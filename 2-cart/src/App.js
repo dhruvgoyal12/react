@@ -78,6 +78,15 @@ getCartCount(){
   return count;
 }
 
+getCartTotal = () =>{
+  const {products} = this.state;
+  let cartTotal = 0;
+  products.map((product) =>{
+    cartTotal += product.qty*product.price;
+  })
+  return cartTotal;
+}
+
 
 
 render(){
@@ -92,7 +101,7 @@ render(){
         onDeleteProduct = {this.handleDeleteProduct}
 
         ></Cart>
-        
+        <div style={{padding: 10, fontSize: 20}}>Total: {this.getCartTotal()}</div>
     </div>
   );
 }
