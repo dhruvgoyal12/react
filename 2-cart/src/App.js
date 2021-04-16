@@ -41,6 +41,7 @@ componentDidMount(){
 
     this.db
     .collection('products')
+    //.where('price', '==', 99).orderBy('price', 'desc')
     .onSnapshot((snapshot) => {
       console.log(snapshot);
       snapshot.docs.map((doc) => {
