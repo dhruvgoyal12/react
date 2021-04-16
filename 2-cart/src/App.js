@@ -1,39 +1,39 @@
 import React from "react";
 import Cart from "./Cart";
 import Navbar from "./Navbar";
-
+import firebase from 'firebase';
 
 
 class App extends React.Component {
   constructor(){
     super();
     this.state={
-        products: [
-        {    
-        price: 999,
-        title: 'Phone',
-        qty: 1,
-        img: '',
-        id: 1
-        },
-        {    
-            price: 99,
-            title: 'watch',
-            qty: 1,
-            img: '',
-            id: 2
-            },
-        
-            {    
-                price: 9,
-                title: 'Pencil',
-                qty: 1,
-                img: '',
-                id: 3
-                },    
-
-        ]
+        products: [],
+        loading: true
     }
+}
+
+componentDidMount(){
+  firebase
+    .firestore()
+    .collection('products')
+    .get()
+    .then((snapshot) => {
+        console.log(snapshot);
+        snapshot.docs.map((doc) => {
+          console.log(doc.data());
+        });
+
+        const products = snapshot.docs.map((doc) =>{
+          const data = doc.data();
+          data['id'] = doc.id;
+          return data;
+        })
+        this.setState({
+          products: products,
+          loading: false
+        })
+    })
 }
 
 handleIncreaseQuantity = (product) => {
@@ -54,7 +54,8 @@ handleDecreaseQuantity = (product) =>{
     if(products[index].qty > 0){
     products[index].qty -= 1;
     this.setState({
-        products: products
+        products: products,
+       
     })
     }
 }
@@ -90,7 +91,8 @@ getCartTotal = () =>{
 
 
 render(){
-  const {products} = this.state;
+  const {products, loading} = this.state;
+  console.log(loading);
   return (
     <div className="App">
         <Navbar count={this.getCartCount()}/>
@@ -101,6 +103,7 @@ render(){
         onDeleteProduct = {this.handleDeleteProduct}
 
         ></Cart>
+        {loading && <h1>Loading products ...</h1>}
         <div style={{padding: 10, fontSize: 20}}>Total: {this.getCartTotal()}</div>
     </div>
   );
