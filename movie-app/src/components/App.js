@@ -1,7 +1,29 @@
 import { data } from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
-function App() {
+import React from "react";
+class App extends React.Component {
+  
+  componentDidMount(){
+    const {store} = this.props;
+    
+    store.subscribe(() =>{
+      console.log('UPDATED');
+      this.forceUpdate();
+    });
+    // make api call
+
+    //dispatch action
+    store.dispatch({
+      type: 'ADD_MOVIES',
+      movies: data
+    })
+    console.log('STATE', store.getState());
+  }
+
+
+  render(){
+    const movies = this.props.store.getState();
   return (
     <div className="App">
     <Navbar />
@@ -12,7 +34,7 @@ function App() {
       </div>
 
       <div className="list">
-      {data.map((movie) => {
+      {movies.map((movie) => {
         return <MovieCard movie={movie} key={movie.imdbID}/>
         
     })}
@@ -22,6 +44,7 @@ function App() {
     
     </div>
   );
+  }
 }
 
 export default App;
