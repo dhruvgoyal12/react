@@ -8,15 +8,12 @@ import rootReducer from './reducers'
 
 // function logger(obj, next, action)
 // logger(obj)(next)(action)
-const logger = function({dispatch, getState}){
-  return function(next){
-    return function(action){
-      //middleware
-      console.log('ACTION_TYPE= ', action.type);
-      //app will be stuck if next not called
-      next(action);
-    }
-  }
+
+const logger = ({dispatch, getState}) => (next) => (action) => {
+//middleware
+console.log('ACTION_TYPE= ', action.type);
+//app will be stuck if next not called
+next(action);
 }
 
 const store = createStore(rootReducer, applyMiddleware(logger));
