@@ -1,3 +1,4 @@
+import {combineReducers} from 'redux';
 import {ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITE} from '../actions'
 
 
@@ -53,9 +54,15 @@ const initialRootState = {
     movies: initialMoviesState,
     search: initialSearchState
 }
-export default function rootReducer(state = initialRootState, action){
-    return {
-        movies: movies(state.movies, action),
-        search: search(state.search, action),
-    }
-}
+// export default function rootReducer(state = initialRootState, action){
+//     return {
+//         movies: movies(state.movies, action),
+//         search: search(state.search, action),
+//     }
+// }
+
+// Redux provides combineReducers to function as a root reducer 
+export default combineReducers({
+    movies: movies,
+    search: search
+})
