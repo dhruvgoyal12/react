@@ -11,6 +11,8 @@ function ExpenseItem(props) {
   const clickHandler = () => {
     // This results in re-rendering of the component function (expenseItem here)
     setTitle("Updated!");
+    // This will not show updated value, because re-rendering is scheduled by react, instead of immediate re-render.
+    console.log(title);
   };
 
   return (
