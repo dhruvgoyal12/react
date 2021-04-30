@@ -10,16 +10,20 @@ function Expenses(props) {
     setFilterYear(year);
   };
 
-  return props.expenses.map((expense) => {
-    return (
-      <Card className="expenses">
-        <ExpensesFilter
-          dropdownStartYear={filterYear}
-          onYearFilter={pickedYearHandler}
-        />
-        <ExpenseItem expense={expense} key={expense.id} />
-      </Card>
-    );
-  });
+  const filterList = props.expenses.filter(
+    (expense) => expense.date.getFullYear().toString() === filterYear
+  );
+
+  return (
+    <Card className="expenses">
+      <ExpensesFilter
+        dropdownStartYear={filterYear}
+        onYearFilter={pickedYearHandler}
+      />
+      {filterList.map((expense) => {
+        return <ExpenseItem expense={expense} key={expense.id} />;
+      })}
+    </Card>
+  );
 }
 export default Expenses;
