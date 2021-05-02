@@ -58,7 +58,7 @@ export default function ExpenseForm(props) {
 
     const expenseData = {
       title: userInput["enteredTitle"],
-      amount: userInput["enteredAmount"],
+      amount: +userInput["enteredAmount"],
       date: new Date(userInput["enteredDate"]),
     };
 
