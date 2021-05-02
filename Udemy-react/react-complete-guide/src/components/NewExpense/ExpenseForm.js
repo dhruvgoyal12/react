@@ -108,6 +108,7 @@ export default function ExpenseForm(props) {
       </div>
       <div className="new-expense__actions">
         <button type="submit">Add Expense</button>
+        <button onClick={props.toggleShowExpenseHandler}>Cancel</button>
       </div>
     </form>
   );
