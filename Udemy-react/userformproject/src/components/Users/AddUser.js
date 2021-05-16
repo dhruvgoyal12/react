@@ -4,29 +4,46 @@ import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
 
 export default function AddUser(props) {
-  const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const [enteredUserInput, setEnteredUserInput] = useState({
+    enteredUsername: "",
+    enteredAge: "",
+  });
 
   const addUserHandle = (event) => {
     event.preventDefault();
 
-    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+    if (
+      enteredUserInput["enteredUsername"].trim().length === 0 ||
+      enteredUserInput["enteredAge"].trim().length === 0
+    ) {
       return;
     }
-    if (+enteredAge < 1) {
+    if (+enteredUserInput["enteredAge"] < 1) {
       return;
     }
 
-    console.log(enteredAge, enteredUsername);
-    setEnteredUsername("");
-    setEnteredAge("");
+    let newUser = {
+      id: Math.random().toString(),
+      name: enteredUserInput["enteredUsername"],
+      age: enteredUserInput["enteredAge"],
+    };
+    props.onAddUser(newUser);
+
+    setEnteredUserInput({
+      enteredAge: "",
+      enteredUsername: "",
+    });
   };
 
   const usernameChangeHandler = (event) => {
-    setEnteredUsername(event.target.value);
+    setEnteredUserInput((prevState) => {
+      return { ...prevState, enteredUsername: event.target.value };
+    });
   };
   const ageChangeHandler = (event) => {
-    setEnteredAge(event.target.value);
+    setEnteredUserInput((prevState) => {
+      return { ...prevState, enteredAge: event.target.value };
+    });
   };
 
   return (
@@ -36,14 +53,14 @@ export default function AddUser(props) {
         <input
           id="username"
           type="text"
-          value={enteredUsername}
+          value={enteredUserInput["enteredUsername"]}
           onChange={usernameChangeHandler}
         />
         <label htmlFor="age">Age (Years)</label>
         <input
           id="age"
           type="number"
-          value={enteredAge}
+          value={enteredUserInput["enteredAge"]}
           onChange={ageChangeHandler}
         />
         <Button type="submit">Add User</Button>
