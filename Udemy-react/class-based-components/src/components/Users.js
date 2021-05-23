@@ -3,12 +3,6 @@ import User from "./User";
 
 import classes from "./Users.module.css";
 
-const DUMMY_USERS = [
-  { id: "u1", name: "Max" },
-  { id: "u2", name: "Manuel" },
-  { id: "u3", name: "Julie" },
-];
-
 import React, { Component } from "react";
 
 export default class Users extends Component {
@@ -20,14 +14,6 @@ export default class Users extends Component {
     };
   }
 
-  const usersList = (
-    <ul>
-      {DUMMY_USERS.map((user) => (
-        <User key={user.id} name={user.name} />
-      ))}
-    </ul>
-  );
-
   toggleUsersHandler() {
     this.setState((prevState) => {
       return {
@@ -37,6 +23,14 @@ export default class Users extends Component {
   }
 
   render() {
+    const usersList = (
+      <ul>
+        {this.props.users.map((user) => (
+          <User key={user.id} name={user.name} />
+        ))}
+      </ul>
+    );
+
     return (
       <div className={classes.users}>
         <button onClick={this.toggleUsersHandler.bind(this)}>
