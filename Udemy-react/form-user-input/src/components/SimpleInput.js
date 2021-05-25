@@ -2,18 +2,18 @@ import { useRef, useState } from "react";
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [enteredName, setEnteredName] = useState("");
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
+  // const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+
+  const enteredNameIsValid = enteredName.trim() !== "";
+  const nameInputIsInValid = !enteredNameIsValid && enteredNameTouched;
+
   const nameInputChangeHandler = (event) => {
     setEnteredName(event.target.value);
   };
 
   const nameInputBlurHandler = (event) => {
     setEnteredNameTouched(true);
-    if (enteredName.trim() == "") {
-      setEnteredNameIsValid(false);
-      return;
-    }
   };
 
   const formSubmitHandler = (event) => {
@@ -21,15 +21,15 @@ const SimpleInput = (props) => {
 
     setEnteredNameTouched(true);
 
-    if (enteredName.trim() == "") {
-      setEnteredNameIsValid(false);
+    if (!enteredNameIsValid) {
       return;
     }
-    setEnteredNameIsValid(true);
+
     const enteredValue = nameInputRef.current.value;
 
     //nameInputRef.current.value = ''; => NOT IDEAL, DO NOT MANIPULATE DOM ON YOUR OWN
     setEnteredName("");
+    setEnteredNameTouched(false);
   };
 
   const nameInputClasses =
