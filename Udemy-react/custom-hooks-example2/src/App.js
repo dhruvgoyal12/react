@@ -9,7 +9,7 @@ function App() {
     const loadedTasks = [];
 
     for (const taskKey in tasksObj) {
-      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
     }
 
     setTasks(loadedTasks);
