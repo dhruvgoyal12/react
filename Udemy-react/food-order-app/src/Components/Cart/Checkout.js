@@ -1,5 +1,5 @@
 import classes from "./Checkout.module.css";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 const isEmpty = (value) => value.trim() === "";
 const isFiveChar = (value) => value.trim().length === 5;
@@ -9,7 +9,7 @@ export default function Checkout(props) {
     name: true,
     street: true,
     city: true,
-    postalCode: true,
+    postal: true,
   });
   const nameInputRef = useRef();
   const streetInputRef = useRef();
