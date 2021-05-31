@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function AllQuotes() {
-  return <div></div>;
+  return <div>All Quotes</div>;
 }
