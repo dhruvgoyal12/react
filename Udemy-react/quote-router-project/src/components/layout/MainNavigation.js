@@ -13,7 +13,7 @@ export default function MainNavigation() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/quotes/add" activeClassName={classes.active}>
+            <NavLink to="/new-quote" activeClassName={classes.active}>
               New Quote
             </NavLink>
           </li>

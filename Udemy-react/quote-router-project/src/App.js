@@ -17,7 +17,7 @@ function App() {
         <Route path="/quotes/:quoteId" exact>
           <QuoteDetail />
         </Route>
-        <Route path="/quotes/add">
+        <Route path="/new-quote">
           <NewQuote />
         </Route>
       </Switch>
