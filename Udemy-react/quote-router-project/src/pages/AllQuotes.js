@@ -7,5 +7,9 @@ const DUMMY_QUOTES = [
 ];
 
 export default function AllQuotes() {
-  return <QuoteList quotes={DUMMY_QUOTES}></QuoteList>;
+  return (
+    <div>
+      <QuoteList quotes={DUMMY_QUOTES}></QuoteList>
+    </div>
+  );
 }
